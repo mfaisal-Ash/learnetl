@@ -107,6 +107,23 @@ services:
       retries: 50
     restart: always
 
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-db-volume:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
   airflow-webserver:
     <<: *airflow-common
     command: webserver
@@ -122,6 +139,7 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+
 
   airflow-scheduler:
     <<: *airflow-common
@@ -280,3 +298,4 @@ services:
 
 volumes:
   postgres-db-volume:
+  mongo-db-volume:

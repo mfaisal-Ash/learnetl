@@ -5,7 +5,26 @@ FROM apache/airflow:2.6.3
 ENV AIRFLOW_HOME=/opt/airflow
 
 USER root
-RUN apt-get update -qq && apt-get install vim -qqq
+# RUN apt-get update -qq && apt-get install vim -qqq vim mongodb
+
+# Update apt-get and install required dependencies
+RUN apt-get update -qq && apt-get install -y wget gnupg
+
+# Add MongoDB GPG key and repository
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | apt-key add - \
+    && echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/debian bullseye/mongodb-org/6.0 main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+# Install MongoDB
+RUN apt-get update -qq && apt-get install -y mongodb-org
+
+# Clean up to reduce image size
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install vim as well
+RUN apt-get update -qq 
+
+
+
 # git gcc g++ -qqq
 
 # Ref: https://airflow.apache.org/docs/docker-stack/recipes.html
