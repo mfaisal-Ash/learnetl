@@ -58,18 +58,18 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/serious-music-345014-7adc51c1a770.json
-    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/serious-music-345014-7adc51c1a770.json'
+    GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/faisal-435307-80f9de88d38f.json
+    AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/faisal-435307-80f9de88d38f.json'
 
     # TODO: Please change GCP_PROJECT_ID & GCP_GCS_BUCKET, as per your config
-    GCP_PROJECT_ID: 'serious-music-345014'
-    GCP_GCS_BUCKET: 'demo-de-class'
+    GCP_PROJECT_ID: 'faisal-435307'
+    GCP_GCS_BUCKET: 'l3arn'
 
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ./credentials/serious-music-345014-7adc51c1a770.json:/.google/credentials/serious-music-345014-7adc51c1a770.json
+    - ./credentials/faisal-435307-80f9de88d38f.json:/.google/credentials/faisal-435307-80f9de88d38f.json
     - ./dataset/raw:/opt/airflow/dataset/raw
     - ./dataset/transform:/opt/airflow/dataset/transform
 
