@@ -38,7 +38,7 @@
 #
 # Feel free to modify this file to suit your needs.
 ---
-version: '3'
+version: '2.8.0'
 x-airflow-common:
   &airflow-common
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
@@ -61,7 +61,7 @@ x-airflow-common:
     GOOGLE_APPLICATION_CREDENTIALS: /.google/credentials/faisal-435307-80f9de88d38f.json
     AIRFLOW_CONN_GOOGLE_CLOUD_DEFAULT: 'google-cloud-platform://?extra__google_cloud_platform__key_path=/.google/credentials/faisal-435307-80f9de88d38f.json'
 
-    # TODO: Please change GCP_PROJECT_ID & GCP_GCS_BUCKET, as per your config
+    # GCP_PROJECT_ID & GCP_GCS_BUCKET
     GCP_PROJECT_ID: 'faisal-435307'
     GCP_GCS_BUCKET: 'l3arn'
 

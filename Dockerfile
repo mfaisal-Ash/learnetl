@@ -1,6 +1,6 @@
 # First-time build can take upto 10 mins.
 
-FROM apache/airflow:2.6.3
+FROM apache/airflow:2.8.0
 
 ENV AIRFLOW_HOME=/opt/airflow
 
@@ -21,7 +21,7 @@ RUN apt-get update -qq && apt-get install -y mongodb-org
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install vim as well
-RUN apt-get update -qq 
+RUN apt-get update -qq && apt-get install -y vim
 
 
 
@@ -48,6 +48,12 @@ RUN DOWNLOAD_URL="https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/goo
        --quiet \
     && rm -rf "${TMP_DIR}" \
     && gcloud --version
+
+# Install polars and pymongo Python packages
+RUN pip install pandas pymongo google-cloud-storage
+RUN pip install apache-airflow-providers-mongo
+RUN pip install pymongo google-cloud-storage google-cloud-bigquery pandas pyarrow
+
 
 WORKDIR $AIRFLOW_HOME
 
